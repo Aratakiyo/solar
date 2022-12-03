@@ -11,8 +11,7 @@ import { selectBasketItems, selectBasketTotal } from '../redux/basketSlice';
 import CheckoutProduct from '../components/CheckoutProduct';
 import { fetchPostJSON } from '../utils/api-helpers';
 import getStripe from '../utils/get-stripejs';
-import { signIn, useSession } from 'next-auth/react';
-import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 
 function Checkout() {
   const items = useSelector(selectBasketItems);
@@ -23,6 +22,13 @@ function Checkout() {
     {} as { [key: string]: Product[] }
   );
   const [loading, setLoading] = useState(false);
+
+  const discount = () => {
+    if (items.length >= 10) {
+      const per = basketTotal / 10;
+      return per;
+    } else return 0;
+  };
 
   useEffect(() => {
     const groupedItems = items.reduce((results, item) => {
@@ -35,12 +41,13 @@ function Checkout() {
 
   const createCheckoutSession = async () => {
     setLoading(true);
-
+    
     const checkoutSession: Stripe.Checkout.Session = await fetchPostJSON(
       '/api/checkout_sessions',
       {
         items: items,
-        
+        amount_subtotal: basketTotal,
+        amount_total: basketTotal - discount(),
       }
     );
 
@@ -66,7 +73,6 @@ function Checkout() {
 
     setLoading(false);
   };
-
 
   return (
     <div className="min-h-screen overflow-hidden bg-[#E7ECEE]">
@@ -115,26 +121,24 @@ function Checkout() {
                         Discount for:{' +10 items'}
                       </div>
                     )}
-                    {items.length >= 10 && (
-                      <p>-${basketTotal/10}</p>
-                    )}
+                    {items.length >= 10 && <p>-${discount()}</p>}
 
                     {items.length < 10 && (
                       <div className="flex flex-col gap-x-1 lg:flex-row">
                         Discount for:{' >10 items'}
                       </div>
                     )}
-                    {items.length < 10 && (
-                      <p>$0</p>
-                    )}
-
+                    {items.length < 10 && <p>-$0</p>}
                   </div>
                 </div>
 
                 <div className="flex justify-between pt-4 text-xl font-semibold">
                   <h4>Total</h4>
                   <h4>
-                    <Currency quantity={basketTotal-(basketTotal/10)} currency="USD" />
+                    <Currency
+                      quantity={basketTotal - basketTotal / 10}
+                      currency="USD"
+                    />
                   </h4>
                 </div>
               </div>
@@ -145,7 +149,10 @@ function Checkout() {
                     <h4 className="mb-4 flex flex-col text-xl font-semibold">
                       Pay in full
                       <span>
-                        <Currency quantity={basketTotal-(basketTotal/10)} currency="USD" />
+                        <Currency
+                          quantity={basketTotal - basketTotal / 10}
+                          currency="USD"
+                        />
                       </span>
                     </h4>
                     {session ? (

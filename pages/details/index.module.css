@@ -11,7 +11,7 @@
 .container > main {
   display: flex;
   flex-direction: column;
-  width: 80vw;
+  width: 70vw;
   min-height: 70vh;
   height: auto;
   margin: auto;
@@ -32,10 +32,9 @@
 .bigImage div,
 .smallImages div {
   background-color: #e7ecee;
-  padding: 2em;
+  padding: 1em;
   border-radius: 2rem;
-  text-align: center;
-  align-items: center;
+ 
 }
 
 .smallImages {
@@ -148,13 +147,13 @@
 
 /* Media Queries */
 
-@media (min-width: 1200px) {
+@media (min-width: 1500px) {
   .container > main {
     flex-direction: row;
   }
 
   .imagesContainer {
-    width: 30em;
+    width: auto;
     margin-right: 4em;
     margin-top: 4em;
   }
@@ -173,6 +172,7 @@
     margin-top: 0;
     margin-left: 2em;
   }
+ 
 }
 
 .productsWrapper {

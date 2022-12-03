@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 import Button from './Button';
 
@@ -14,12 +15,13 @@ function Landing() {
         </h1>
 
         <div className="space-x-8">
-          <Button title="Buy Now" href='/checkout' />
+          <Link href="/search">
+            <Button title="Browse" />
+          </Link>
+
           <a className="link">Learn More</a>
         </div>
       </div>
-
-      
     </section>
   );
 }

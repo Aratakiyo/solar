@@ -1,11 +1,6 @@
-import {
-  GetServerSideProps,
-  GetStaticPaths,
-  GetStaticProps,
-  NextPage,
-} from 'next';
-import { Session } from 'next-auth';
-import { useContext, useEffect, useState } from 'react';
+import { GetStaticPaths, GetStaticProps } from 'next';
+
+import { useState } from 'react';
 import Header from '../../components/Header';
 import { client, urlFor } from '../../utils/clients';
 import Image from 'next/image';
@@ -23,8 +18,8 @@ interface Props {
   categories: Category[];
 }
 
-const Details = ({ productDetails, products, categories }: Props) => {
-  const [imageIndex, setImageIndex] = useState(0);
+const Details = ({ productDetails, products }: Props) => {
+  const [imageIndex] = useState(0);
 
   const dispatch = useDispatch();
 
@@ -63,11 +58,9 @@ const Details = ({ productDetails, products, categories }: Props) => {
             </div>
           </section>
           <section className={styles.infoContainer}>
-            <h2 className={styles.infoTitle}>
-              {productDetails.title}
-            </h2>
+            <h2 className={styles.infoTitle}>{productDetails.title}</h2>
             <article>
-              <h3 >Details: </h3>
+              <h3>Details: </h3>
               <p className={styles.desc}>{productDetails.description}</p>
             </article>
             <p className={styles.price}>Price: ${productDetails.price}</p>
@@ -80,7 +73,7 @@ const Details = ({ productDetails, products, categories }: Props) => {
           </section>
         </main>
         <div className={styles.productsWrapper}>
-          <h2>You may also like</h2>
+          <h2>Similar Products</h2>
           <div className={styles.marquee}>
             <div className={styles.track && styles.productsContainer}>
               {showProducts(productDetails.category._ref)}

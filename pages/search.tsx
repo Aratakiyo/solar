@@ -9,6 +9,7 @@ import { fetchCategories } from '../utils/fetchCategories';
 import { fetchProducts } from '../utils/fetchProducts';
 import { getSession } from 'next-auth/react';
 import type { Session } from 'next-auth';
+import { all } from 'axios';
 
 interface Props {
   categories: Category[];
@@ -21,6 +22,11 @@ function search({ categories, products }: Props) {
     return products
       .filter((product) => product.category._ref === categories[category]._id)
       .map((product) => <Product product={product} key={product._id} />); // filter products by category
+  };
+
+  const allProd = () => {
+    return products
+      .map((product) => <Product product={product} key={product._id} />);
   };
 
   return (
@@ -36,13 +42,23 @@ function search({ categories, products }: Props) {
       <Top />
 
       <main className="relative h-[200vh] bg-[#1B1B1B]">
-        <section>
+        <section className="relative min-h-screen bg-[#1B1B1B]">
           <div className="space-y-10 py-16">
             <Tab.Group>
               <Tab.List className="flex justify-center">
+
+                  <Tab className={({ selected }) =>
+                      `whitespace-nowrap rounded-t-lg py-3 px-5 text-sm font-light outline-none md:py-4 md:px-6 md:text-base ${
+                        selected
+                          ? 'borderGradient bg-[#35383C] text-white'
+                          : 'border-b-2 border-[#35383C] text-[#747474]'
+                      }`
+                    }>All</Tab>
+
+
                 {categories.map((category) => (
                   <Tab
-                    key={category._id}
+                    key={ category._id} 
                     id={category._id}
                     className={({ selected }) =>
                       `whitespace-nowrap rounded-t-lg py-3 px-5 text-sm font-light outline-none md:py-4 md:px-6 md:text-base ${
@@ -57,6 +73,7 @@ function search({ categories, products }: Props) {
                 ))}
               </Tab.List>
               <Tab.Panels className="mx-auto max-w-fit pt-10 pb-24 sm:px-4">
+                <Tab.Panel className="tabPanel">{allProd()}</Tab.Panel>
                 <Tab.Panel className="tabPanel">{showProducts(0)}</Tab.Panel>
                 <Tab.Panel className="tabPanel">{showProducts(1)}</Tab.Panel>
                 <Tab.Panel className="tabPanel">{showProducts(2)}</Tab.Panel>

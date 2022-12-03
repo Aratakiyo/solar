@@ -5,6 +5,7 @@ import Currency from "react-currency-formatter";
 import { removeFromBasket } from "../redux/basketSlice";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
 interface Props {
   items: Product[];
@@ -39,14 +40,12 @@ function CheckoutProduct({ id, items }: Props) {
             <h4 className="font-semibold lg:w-96">{items[0].title}</h4>
             <p className="flex items-end gap-x-1 font-semibold">
               {items.length}
-              <ChevronDownIcon className="h-6 w-6 text-blue-500" />
             </p>
           </div>
 
-          <p className="flex cursor-pointer items-end text-blue-500 hover:underline">
+          <Link href={`/details/${items[0].slug?.current}`} className="flex cursor-pointer items-end text-blue-500 hover:underline">
             Show product details
-            <ChevronDownIcon className="h-6 w-6" />
-          </p>
+          </Link>
         </div>
         <div className="flex flex-col items-end space-y-4">
           <h4 className="text-xl font-semibold lg:text-2xl">

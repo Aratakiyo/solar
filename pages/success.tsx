@@ -94,14 +94,12 @@ function Success({ products }: Props) {
             <div className="space-y-2 pb-3">
               <p>Your order is confirmed</p>
               <p className="text-sm text-gray-600">
-                We’ve accepted your order, and we’re getting it ready. Come back
-                to this page for updates on your shipment status.
+                We’ve accepted your order, and we’re getting it ready to be
+                delivered.
               </p>
             </div>
             <div className="pt-3 text-sm">
-              <p className="font-medium text-gray-600">
-                Other tracking ID:
-              </p>
+              <p className="font-medium text-gray-600">Other tracking ID:</p>
               <p>{session_id?.slice(-25)}</p>
             </div>
           </div>
@@ -113,7 +111,6 @@ function Success({ products }: Props) {
             </p>
           </div>
           <div className="mx-4 flex flex-col items-center justify-between text-sm lg:ml-14 lg:flex-row">
-            <p className="hidden lg:inline">Need help? Contact us</p>
             {mounted && (
               <Button
                 title="Continue Shopping"
@@ -192,12 +189,18 @@ function Success({ products }: Props) {
                   </div>
                   <div className="flex justify-between text-sm">
                     <p className="text-[gray]">Discount</p>
-                    <p className="text-[gray]"></p>
+                    <p className="text-[gray]">
+                      -
+                      {products.length >= 10 && (
+                        <Currency quantity={subtotal / 10} currency="USD" />
+                      )}
+                    </p>
                   </div>
                   <div className="flex justify-between text-sm">
                     <p className="text-[gray]">Shipping</p>
                     <p className="font-medium">
-                      <Currency quantity={20} currency="USD" />
+                      +
+                      <Currency quantity={0} currency="USD" />
                     </p>
                   </div>
                 </div>
@@ -206,7 +209,7 @@ function Success({ products }: Props) {
                   <p className="flex items-center gap-x-2 text-xs text-[gray]">
                     USD
                     <span className="text-xl font-medium text-black">
-                      <Currency quantity={subtotal + 20} />
+                      <Currency quantity={subtotal - subtotal / 10} />
                     </span>
                   </p>
                 </div>

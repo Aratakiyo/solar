@@ -36,7 +36,7 @@ const Home = ({ categories, products }: Props) => {
       <Basket />
       <Top />
 
-      <main id='#top' className="relative h-[200vh] bg-[#E7ECEE]">
+      <main id="#top" className="relative h-[200vh] bg-[#E7ECEE]">
         <Landing />
       </main>
       <section className="relative z-40 -mt-[100vh] min-h-screen bg-[#1B1B1B]">
