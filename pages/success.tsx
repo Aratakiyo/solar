@@ -107,7 +107,8 @@ function Success({ products }: Props) {
           <div className="my-4 mx-4 space-y-2 rounded-md border border-gray-300 p-4 lg:ml-14">
             <p>Order updates</p>
             <p className="text-sm text-gray-600">
-              You’ll get shipping and delivery updates by email and text.
+              You’ll get shipping and delivery updates by email:{' '}
+              {session ? session.user?.email : ' '}.
             </p>
           </div>
           <div className="mx-4 flex flex-col items-center justify-between text-sm lg:ml-14 lg:flex-row">

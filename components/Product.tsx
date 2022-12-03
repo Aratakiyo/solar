@@ -37,7 +37,7 @@ const Product = ({ product }: Props) => {
       </div>
 
       <div className="flex flex-1 items-center justify-between space-x-3">
-        <div className="space-y-2 text-xl text-white md:text-1xl">
+        <div className="space-y-2 text-sm text-white ">
           <NextLink href={`/details/${product.slug?.current}`}>
             <p>{product.title}</p>
           </NextLink>

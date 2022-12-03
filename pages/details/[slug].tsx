@@ -11,6 +11,7 @@ import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import Link from 'next/link';
 import Product from '../../components/Product';
+import { Tab } from '@headlessui/react';
 
 interface Props {
   productDetails: Product;
@@ -72,15 +73,32 @@ const Details = ({ productDetails, products }: Props) => {
             </div>
           </section>
         </main>
-        <div className={styles.productsWrapper}>
-          <h2>Similar Products</h2>
-          <div className={styles.marquee}>
-            <div className={styles.track && styles.productsContainer}>
+        <div className="relative min-h-screen bg-[#1B1B1B]" >
+        <Tab.Group >
+          <Tab.List className="flex justify-center">
+            <Tab
+              className={({ selected }) =>
+                `  rounded-t-lg py-3 px-5 text-sm font-light outline-none md:py-4 md:px-6 md:text-base ${
+                  selected
+                    ? 'borderGradient bg-[#35383C] text-white'
+                    : 'border-b-2 border-[#35383C] text-[#747474]'
+                }`
+              }
+            >
+              Related
+            </Tab>
+          </Tab.List>
+          <Tab.Panels className="mx-auto max-w-fit pt-10 pb-24 sm:px-4">
+            <Tab.Panel className="tabPanel">
               {showProducts(productDetails.category._ref)}
-            </div>
-          </div>
+            </Tab.Panel>
+          </Tab.Panels>
+        </Tab.Group>
         </div>
       </div>
+      
+        
+        
     </div>
   );
 };

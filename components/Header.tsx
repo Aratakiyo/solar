@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { Fragment } from 'react';
-import { ShoppingBagIcon, UserIcon, ClockIcon } from '@heroicons/react/outline';
+import { ShoppingBagIcon } from '@heroicons/react/outline';
 import { useSelector } from 'react-redux';
 import { selectBasketItems } from '../redux/basketSlice';
 import { signIn, signOut, useSession } from 'next-auth/react';
@@ -13,7 +13,7 @@ function Header() {
   const items = useSelector(selectBasketItems);
 
   return (
-    <header className="sticky top-0 z-30 flex w-full items-center justify-between  bg-gradient-to-r from-yellow-100 to-blue-200 p-4">
+    <header className="relative top-0 z-30 flex w-full items-center justify-between  bg-gradient-to-r from-yellow-100 to-blue-200 p-4">
       <div className="flex items-center justify-center md:w-1/5">
         <Link href="/">
           <div className="relative h-11 w-11 cursor-pointer opacity-75 transition hover:opacity-100">
@@ -44,24 +44,10 @@ function Header() {
             <ShoppingBagIcon className="headerIcon" />
           </div>
         </Link>
-
-        <Link href="/history" className="headerIcon">
-          <ClockIcon className="cursor-pointer rounded-full" />
-        </Link>
-
         {session ? (
           <Menu as="div" className="relative inline-block text-left">
-            <Menu.Button>
-              <Image
-                src={
-                  session.user?.image ||
-                  'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y'
-                }
-                alt=""
-                className="cursor-pointer rounded-full"
-                width={34}
-                height={34}
-              />
+            <Menu.Button className="link">
+              {session.user?.name?.split(' ')[0]}
             </Menu.Button>
             <Transition
               as={Fragment}
@@ -91,11 +77,13 @@ function Header() {
             </Transition>
           </Menu>
         ) : (
-          <Button
-            padding="py-2 px-3 bg-gradient-to-r from-red-400 to-blue-400"
-            title="Sign In"
-            onClick={() => signIn()}
-          />
+          <div>
+            <Button
+              padding="py-2 px-3 bg-gradient-to-r from-red-400 to-blue-400"
+              title="Sign In"
+              onClick={() => signIn()}
+            />
+          </div>
         )}
       </div>
     </header>
