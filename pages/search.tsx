@@ -9,7 +9,6 @@ import { fetchCategories } from '../utils/fetchCategories';
 import { fetchProducts } from '../utils/fetchProducts';
 import { getSession } from 'next-auth/react';
 import type { Session } from 'next-auth';
-import { all } from 'axios';
 
 interface Props {
   categories: Category[];

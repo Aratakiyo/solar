@@ -29,6 +29,14 @@ function Success({ products }: Props) {
     (acc, product) => acc + product.price.unit_amount / 100,
     0
   );
+
+  const discount = () => {
+    if (products.length >= 10) {
+      const per = subtotal / 10;
+      return per;
+    } else return 0;
+  };
+
   const { data: session } = useSession();
 
   useEffect(() => {
@@ -115,7 +123,7 @@ function Success({ products }: Props) {
             {mounted && (
               <Button
                 title="Continue Shopping"
-                onClick={() => router.push('/')}
+                onClick={() => router.push('/search')}
                 width={isTabletOrMobile ? 'w-full' : undefined}
                 padding="py-4"
               />
@@ -145,7 +153,7 @@ function Success({ products }: Props) {
                 </button>
 
                 <p className="text-xl font-medium text-black">
-                  <Currency quantity={subtotal + 20} />
+                  <Currency quantity={subtotal} />
                 </p>
               </div>
             </div>
@@ -193,7 +201,7 @@ function Success({ products }: Props) {
                     <p className="text-[gray]">
                       -
                       {products.length >= 10 && (
-                        <Currency quantity={subtotal / 10} currency="USD" />
+                        <Currency quantity={discount()} currency="USD" />
                       )}
                     </p>
                   </div>
@@ -210,7 +218,7 @@ function Success({ products }: Props) {
                   <p className="flex items-center gap-x-2 text-xs text-[gray]">
                     USD
                     <span className="text-xl font-medium text-black">
-                      <Currency quantity={subtotal - subtotal / 10} />
+                      <Currency quantity={subtotal - discount()} />
                     </span>
                   </p>
                 </div>

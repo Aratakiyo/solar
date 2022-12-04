@@ -1,11 +1,10 @@
-import { ChevronDownIcon } from "@heroicons/react/outline";
-import Image from "next/image";
-import { urlFor } from "../sanity";
-import Currency from "react-currency-formatter";
-import { removeFromBasket } from "../redux/basketSlice";
-import { useDispatch } from "react-redux";
-import toast from "react-hot-toast";
-import Link from "next/link";
+import Image from 'next/image';
+import { urlFor } from '../sanity';
+import Currency from 'react-currency-formatter';
+import { removeFromBasket } from '../redux/basketSlice';
+import { useDispatch } from 'react-redux';
+import toast from 'react-hot-toast';
+import Link from 'next/link';
 
 interface Props {
   items: Product[];
@@ -19,7 +18,7 @@ function CheckoutProduct({ id, items }: Props) {
     dispatch(removeFromBasket({ id }));
 
     toast.error(`${items[0].title} removed from basket`, {
-      position: "bottom-center",
+      position: 'bottom-center',
     });
   };
 
@@ -43,7 +42,10 @@ function CheckoutProduct({ id, items }: Props) {
             </p>
           </div>
 
-          <Link href={`/details/${items[0].slug?.current}`} className="flex cursor-pointer items-end text-blue-500 hover:underline">
+          <Link
+            href={`/details/${items[0].slug?.current}`}
+            className="flex cursor-pointer items-end text-blue-500 hover:underline"
+          >
             Show product details
           </Link>
         </div>

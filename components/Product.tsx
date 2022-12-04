@@ -5,7 +5,6 @@ import { urlFor } from '../sanity';
 import { useDispatch } from 'react-redux';
 import { addToBasket } from '../redux/basketSlice';
 import toast from 'react-hot-toast';
-import Link from 'next/link';
 import NextLink from 'next/link';
 
 interface Props {

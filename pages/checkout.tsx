@@ -39,15 +39,16 @@ function Checkout() {
     setGroupedItemsInBasket(groupedItems);
   }, [items]);
 
+ 
   const createCheckoutSession = async () => {
     setLoading(true);
     
+
     const checkoutSession: Stripe.Checkout.Session = await fetchPostJSON(
       '/api/checkout_sessions',
       {
         items: items,
-        amount_subtotal: basketTotal,
-        amount_total: basketTotal - discount(),
+        
       }
     );
 
@@ -91,7 +92,7 @@ function Checkout() {
           {items.length === 0 && (
             <Button
               title="Continue Shopping"
-              onClick={() => router.push('/')}
+              onClick={() => router.push('/search')}
             />
           )}
         </div>
@@ -121,7 +122,10 @@ function Checkout() {
                         Discount for:{' +10 items'}
                       </div>
                     )}
-                    {items.length >= 10 && <p>-${discount()}</p>}
+                    {items.length >= 10 && <Currency
+                      quantity={discount()}
+                      currency="USD"
+                    />}
 
                     {items.length < 10 && (
                       <div className="flex flex-col gap-x-1 lg:flex-row">
@@ -136,7 +140,7 @@ function Checkout() {
                   <h4>Total</h4>
                   <h4>
                     <Currency
-                      quantity={basketTotal - basketTotal / 10}
+                      quantity={basketTotal - discount()}
                       currency="USD"
                     />
                   </h4>
@@ -150,7 +154,7 @@ function Checkout() {
                       Pay in full
                       <span>
                         <Currency
-                          quantity={basketTotal - basketTotal / 10}
+                          quantity={basketTotal - discount()}
                           currency="USD"
                         />
                       </span>
