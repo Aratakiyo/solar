@@ -23,7 +23,7 @@ const Product = ({ product }: Props) => {
   };
 
   return (
-    <div className="flex h-fit w-[300px] select-none flex-col space-y-2 rounded-xl bg-[#35383C] p-8 md:h-[400px] md:w-[400px] md:p-11">
+    <div className="flex h-fit w-[300px] select-none flex-col space-y-2 rounded-xl  bg-gradient-to-r from-red-400 to-blue-400 p-8 md:h-[340px] md:w-[320px] md:p-11">
       <div className="relative h-64 w-full md:h-72">
         <NextLink href={`/details/${product.slug?.current}`}>
           <Image
@@ -44,10 +44,10 @@ const Product = ({ product }: Props) => {
         </div>
 
         <div
-          className="flex h-16 w-16 flex-shrink-0 cursor-pointer items-center justify-center rounded-full bg-gradient-to-r from-red-500 to-blue-500 md:h-[70px] md:w-[70px]"
+          className="flex h-10 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full bg-blue-800 md:h-[60px] md:w-[60px]"
           onClick={addItemToBasket}
         >
-          <ShoppingCartIcon className="h-8 w-8 text-white" />
+          <ShoppingCartIcon className="h-6 w-6 text-white" />
         </div>
       </div>
     </div>

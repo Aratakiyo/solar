@@ -31,6 +31,11 @@
   }
 }
 
+.box {
+  position: relative;
+  width: 72vh;
+}
+
 .openning {
   background-image: url(https://i.ibb.co/JjRV0RV/home-bg.jpg);
   background-size: cover;
@@ -47,3 +52,4 @@
   justify-content: space-between;
   padding: 4rem;
 }
+

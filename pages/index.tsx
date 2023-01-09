@@ -3,7 +3,6 @@ import type { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Basket from '../components/Basket';
 import Header from '../components/Header';
-import Top from '../components/top';
 import Landing from '../components/Landing';
 import Product from '../components/Product';
 import { fetchCategories } from '../utils/fetchCategories';
@@ -24,6 +23,7 @@ const Home = ({ categories, products }: Props) => {
       .map((product) => <Product product={product} key={product._id} />); // filter products by category
   };
 
+  
   return (
     <div className="">
       <Head>
@@ -31,15 +31,14 @@ const Home = ({ categories, products }: Props) => {
         <link rel="icon" href="/logo-small.png" />
       </Head>
 
-      <Header />
+      <Header products={products} />
 
       <Basket />
-      <Top />
 
       <main id="#top" className="relative h-[200vh] bg-[#E7ECEE]">
         <Landing />
       </main>
-      <section className="relative z-40 -mt-[100vh] min-h-screen bg-[#1B1B1B]">
+      <section className="relative z-40 -mt-[100vh] min-h-screen bg-[#02072F]">
         <div className="space-y-10 py-16">
           <h1 className="text-center text-4xl font-medium tracking-wide text-white md:text-5xl">
             Products
@@ -54,7 +53,7 @@ const Home = ({ categories, products }: Props) => {
                   className={({ selected }) =>
                     `  rounded-t-lg py-3 px-5 text-sm font-light outline-none md:py-4 md:px-6 md:text-base ${
                       selected
-                        ? 'borderGradient bg-[#35383C] text-white'
+                        ? 'borderGradient bg-[#020E5D] text-white'
                         : 'border-b-2 border-[#35383C] text-[#747474]'
                     }`
                   }

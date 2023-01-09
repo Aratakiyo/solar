@@ -4,7 +4,7 @@
 }
 
 .container {
-  width: 100xw;
+  width: auto;
   height: 80vh;
 }
 
@@ -32,7 +32,7 @@
 .bigImage div,
 .smallImages div {
   background-color: #e7ecee;
-  padding: 1em;
+  padding: 2rem;
   border-radius: 2rem;
  
 }
@@ -147,15 +147,15 @@
 
 /* Media Queries */
 
-@media (min-width: 1500px) {
+@media (min-width: 1200px) {
   .container > main {
     flex-direction: row;
   }
 
   .imagesContainer {
     width: auto;
-    margin-right: 4em;
-    margin-top: 4em;
+    margin-right: 0em;
+    margin-top: 0em;
   }
 }
 

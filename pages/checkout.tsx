@@ -12,8 +12,13 @@ import CheckoutProduct from '../components/CheckoutProduct';
 import { fetchPostJSON } from '../utils/api-helpers';
 import getStripe from '../utils/get-stripejs';
 import { useSession } from 'next-auth/react';
+import Link from 'next/link';
 
-function Checkout() {
+interface Props {
+  products: Product[];
+}
+
+function Checkout({ products}: Props) {
   const items = useSelector(selectBasketItems);
   const { data: session } = useSession();
   const basketTotal = useSelector(selectBasketTotal);
@@ -39,16 +44,13 @@ function Checkout() {
     setGroupedItemsInBasket(groupedItems);
   }, [items]);
 
- 
   const createCheckoutSession = async () => {
     setLoading(true);
-    
 
     const checkoutSession: Stripe.Checkout.Session = await fetchPostJSON(
       '/api/checkout_sessions',
       {
         items: items,
-        
       }
     );
 
@@ -81,8 +83,8 @@ function Checkout() {
         <title>Bag</title>
         <link rel="icon" href="/small-logo.png" />
       </Head>
-      <Header />
-      <main className="mx-auto max-w-5xl pb-24">
+      <Header products={products}  />
+      <main className="mx-auto max-w-5xl pb-24 pt-20">
         <div className="px-5">
           <h1 className="my-4 text-3xl font-semibold lg:text-4xl">
             {items.length > 0 ? 'Review your bag.' : 'Your bag is empty.'}
@@ -122,10 +124,9 @@ function Checkout() {
                         Discount for:{' +10 items'}
                       </div>
                     )}
-                    {items.length >= 10 && <Currency
-                      quantity={discount()}
-                      currency="USD"
-                    />}
+                    {items.length >= 10 && (
+                      <Currency quantity={discount()} currency="USD" />
+                    )}
 
                     {items.length < 10 && (
                       <div className="flex flex-col gap-x-1 lg:flex-row">
@@ -159,23 +160,31 @@ function Checkout() {
                         />
                       </span>
                     </h4>
-                    {session ? (
-                      <Button
-                        noIcon
-                        loading={loading}
-                        title="Check Out"
-                        width="w-full"
-                        onClick={createCheckoutSession}
-                      />
-                    ) : (
-                      <Button
-                        title="Please Login"
-                        onClick={() => {
-                          window.location.replace('/search');
-                          window.location.replace('/api/auth/signin');
-                        }}
-                      />
-                    )}
+                    <div className='mx-15 space-x-5'>
+                      <Link href="/search">
+                        <Button
+                          title="Continue Shopping"
+                        />
+                      </Link>
+                      {session ? (
+                        <Button
+                          noIcon
+                          loading={loading}
+                          title="Check Out"
+                          onClick={createCheckoutSession}
+                        />
+                      ) : (
+                        <Button
+                          noIcon
+                          loading={loading}
+                          title="Check Out"
+                          onClick={() => {
+                            window.location.replace('/search');
+                            window.location.replace('/api/auth/signin');
+                          }}
+                        />
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>

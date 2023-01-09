@@ -1,5 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-
+import { Rating } from '@mui/material';
 import { useState } from 'react';
 import Header from '../../components/Header';
 import { client, urlFor } from '../../utils/clients';
@@ -43,7 +43,7 @@ const Details = ({ productDetails, products }: Props) => {
       <title>{productDetails.title}</title>
       <link rel="icon" href="/logo-small.png" />
       <div className={styles.container}>
-        <Header />
+        <Header products={products} />
 
         <main>
           <section className={styles.imagesContainer}>
@@ -64,6 +64,13 @@ const Details = ({ productDetails, products }: Props) => {
               <h3>Details: </h3>
               <p className={styles.desc}>{productDetails.description}</p>
             </article>
+            
+              <div className='flex-1 items-center justify-center space-x-3 md:inline-flex mb-5'>
+                <p>Rating: </p>
+                <Rating value={productDetails.rating} readOnly></Rating>
+                <p>({productDetails.numReviews} reviews)</p>
+              </div>
+            
             <p className={styles.price}>Price: ${productDetails.price}</p>
             <div className={styles.actionsContainer}>
               <Link href={'/checkout'} onClick={addItemToBasket}>
@@ -73,32 +80,29 @@ const Details = ({ productDetails, products }: Props) => {
             </div>
           </section>
         </main>
-        <div className="relative min-h-screen bg-[#1B1B1B]" >
-        <Tab.Group >
-          <Tab.List className="flex justify-center">
-            <Tab
-              className={({ selected }) =>
-                `  rounded-t-lg py-3 px-5 text-sm font-light outline-none md:py-4 md:px-6 md:text-base ${
-                  selected
-                    ? 'borderGradient bg-[#35383C] text-white'
-                    : 'border-b-2 border-[#35383C] text-[#747474]'
-                }`
-              }
-            >
-              Related
-            </Tab>
-          </Tab.List>
-          <Tab.Panels className="mx-auto max-w-fit pt-10 pb-24 sm:px-4">
-            <Tab.Panel className="tabPanel">
-              {showProducts(productDetails.category._ref)}
-            </Tab.Panel>
-          </Tab.Panels>
-        </Tab.Group>
+        <div className="relative min-h-screen bg-[#02072F]">
+          <Tab.Group>
+            <Tab.List className="flex justify-center">
+              <Tab
+                className={({ selected }) =>
+                  `  rounded-t-lg py-3 px-5 text-sm font-light outline-none md:py-4 md:px-6 md:text-base ${
+                    selected
+                      ? 'borderGradient bg-[#020E5D] text-white'
+                      : 'border-b-2 border-[#35383C] text-[#747474]'
+                  }`
+                }
+              >
+                Related
+              </Tab>
+            </Tab.List>
+            <Tab.Panels className="mx-auto max-w-fit pt-10 pb-24 sm:px-4">
+              <Tab.Panel className="tabPanel">
+                {showProducts(productDetails.category._ref)}
+              </Tab.Panel>
+            </Tab.Panels>
+          </Tab.Group>
         </div>
       </div>
-      
-        
-        
     </div>
   );
 };

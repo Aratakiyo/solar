@@ -3,7 +3,6 @@ import type { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Basket from '../components/Basket';
 import Header from '../components/Header';
-import Top from '../components/top';
 import Product from '../components/Product';
 import { fetchCategories } from '../utils/fetchCategories';
 import { fetchProducts } from '../utils/fetchProducts';
@@ -24,8 +23,9 @@ function search({ categories, products }: Props) {
   };
 
   const allProd = () => {
-    return products
-      .map((product) => <Product product={product} key={product._id} />);
+    return products.map((product) => (
+      <Product product={product} key={product._id} />
+    ));
   };
 
   return (
@@ -35,34 +35,35 @@ function search({ categories, products }: Props) {
         <link rel="icon" href="/logo-small.png" />
       </Head>
 
-      <Header />
+      <Header products={products} />
 
       <Basket />
-      <Top />
 
-      <main className="relative h-[200vh] bg-[#1B1B1B]">
-        <section className="relative min-h-screen bg-[#1B1B1B]">
+      <main className="relative top-5 h-[200vh] bg-[#02072F]">
+        <section className="relative min-h-screen bg-[#02072F]">
           <div className="space-y-10 py-16">
             <Tab.Group>
               <Tab.List className="flex justify-center">
-
-                  <Tab className={({ selected }) =>
-                      `rounded-t-lg py-3 px-5 text-sm font-light outline-none md:py-4 md:px-6 md:text-base ${
-                        selected
-                          ? 'borderGradient bg-[#35383C] text-white'
-                          : 'border-b-2 border-[#35383C] text-[#747474]'
-                      }`
-                    }>All</Tab>
-
+                <Tab
+                  className={({ selected }) =>
+                    `rounded-t-lg py-3 px-5 text-sm font-light outline-none md:py-4 md:px-6 md:text-base ${
+                      selected
+                        ? 'borderGradient bg-[#020E5D] text-white'
+                        : 'border-b-2 border-[#35383C] text-[#747474]'
+                    }`
+                  }
+                >
+                  All
+                </Tab>
 
                 {categories.map((category) => (
                   <Tab
-                    key={ category._id} 
+                    key={category._id}
                     id={category._id}
                     className={({ selected }) =>
-                      `rounded-t-lg py-3 px-5 text-sm font-light outline-none md:py-4 md:px-6 ${
+                      `rounded-t-lg py-3 px-2 text-sm font-light outline-none md:py-4 md:px-6 md:text-base ${
                         selected
-                          ? 'borderGradient bg-[#35383C] text-white'
+                          ? 'borderGradient bg-[#020E5D] text-white'
                           : 'border-b-2 border-[#35383C] text-[#747474]'
                       }`
                     }
