@@ -24,10 +24,4 @@ yarn create next-app --example with-tailwindcss with-tailwindcss-app
 pnpm create next-app --example with-tailwindcss with-tailwindcss-app
 ```
 
-AUTH0_SECRET=d456c71eab1df93708abad67c39fe79b
-AUTH0_BASE_URL=http://localhost:3000
-AUTH0_ISSUER = https://dev-etf3bzz48wltgajj.us.auth0.com
-AUTH0_CLIENT_SECRET = BfI2_lsmGh5V4pb6cdkTSnF25Ql7Mm0ojdMmQHpmD6oS6-EkpepyRTYpgzs2cSUr
-AUTH0_CLIENT_ID = RgFVhgWty5kq40vtmJX2Y5C4D4qknFaV
-
 Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
