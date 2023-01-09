@@ -12,7 +12,6 @@ import NextLink from 'next/link';
 
 export interface Props {
   products: Product[];
-  title: string;
 }
 
 const Header = ({ products }: Props) => {
