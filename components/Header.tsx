@@ -15,8 +15,6 @@ export interface Props {
   title: string;
 }
 
-
-
 const Header = ({ products }: Props) => {
   const { data: session } = useSession();
   const items = useSelector(selectBasketItems);
