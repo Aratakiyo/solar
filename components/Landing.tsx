@@ -6,7 +6,7 @@ function Landing() {
   return (
     <section className="openning">
       <div className="space-y-8">
-        <h1 className="space-y-3 text-5xl font-semibold tracking-wide lg:text-6xl xl:text-7xl">
+        <h1 className="space-y-3 text-5xl font-semibold tracking-wide lg:text-5xl xl:text-7xl">
           <span className="block bg-gradient-to-r from-red-500 to-black bg-clip-text text-transparent">
             Go Solar
           </span>
