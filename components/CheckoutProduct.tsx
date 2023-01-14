@@ -1,10 +1,11 @@
 import Image from 'next/image';
 import { urlFor } from '../sanity';
 import Currency from 'react-currency-formatter';
-import { removeFromBasket } from '../redux/basketSlice';
+import { addToBasket, removeFromBasket } from '../redux/basketSlice';
 import { useDispatch } from 'react-redux';
 import toast from 'react-hot-toast';
 import Link from 'next/link';
+import { PlusIcon, MinusIcon } from '@heroicons/react/outline';
 
 interface Props {
   items: Product[];
@@ -18,6 +19,14 @@ function CheckoutProduct({ id, items }: Props) {
     dispatch(removeFromBasket({ id }));
 
     toast.error(`${items[0].title} removed from basket`, {
+      position: 'bottom-center',
+    });
+  };
+
+  const addItemToBasket = () => {
+    dispatch(addToBasket(items[0]));
+
+    toast.success(`${items[0].title} added to basket`, {
       position: 'bottom-center',
     });
   };
@@ -38,7 +47,15 @@ function CheckoutProduct({ id, items }: Props) {
           <div className="flex flex-col gap-x-8 text-xl lg:flex-row lg:text-2xl">
             <h4 className="font-semibold lg:w-96">{items[0].title}</h4>
             <p className="flex items-end gap-x-1 font-semibold">
+              <MinusIcon
+                className="mr-4 h-9 w-6 cursor-pointer text-blue-600 opacity-75 transition hover:opacity-100"
+                onClick={removeItemFromBasket}
+              />
               {items.length}
+              <PlusIcon
+                className="ml-4 h-10 w-6 cursor-pointer text-blue-600 opacity-75 transition hover:opacity-100"
+                onClick={addItemToBasket}
+              />
             </p>
           </div>
 
@@ -56,12 +73,6 @@ function CheckoutProduct({ id, items }: Props) {
               currency="USD"
             />
           </h4>
-          <button
-            onClick={removeItemFromBasket}
-            className="text-blue-500 hover:underline"
-          >
-            Remove
-          </button>
         </div>
       </div>
     </div>
