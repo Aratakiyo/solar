@@ -37,7 +37,7 @@
 }
 
 .openning {
-  background-image: url(https://i.ibb.co/JjRV0RV/home-bg.jpg);
+  background-image: url(./home-bg.jpg);
   background-size: cover;
   background-position: center;
   position: static;
@@ -52,4 +52,3 @@
   justify-content: space-between;
   padding: 2rem;
 }
-

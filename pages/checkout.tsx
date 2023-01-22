@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import Header from '../components/Header';
-import { ChevronDownIcon } from '@heroicons/react/solid';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Currency from 'react-currency-formatter';
