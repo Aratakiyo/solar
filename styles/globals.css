@@ -37,7 +37,7 @@
 }
 
 .openning {
-  background-image: url(./home-bg.jpg);
+  background-image: url(home-bg.jpg);
   background-size: cover;
   background-position: center;
   position: static;
