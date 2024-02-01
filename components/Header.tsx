@@ -32,7 +32,7 @@ const Header = ({ products }: Props) => {
     <header className="fixed top-0 z-10 inline-flex w-full items-center justify-between  bg-gradient-to-r from-yellow-300 to-blue-300 p-3  ">
       <div className="flex items-center justify-center md:w-1/5">
         <Link href="/">
-          <div className="relative h-11 w-11 cursor-pointer opacity-75 transition hover:opacity-100">
+          <div className="relative h-11 w-11 cursor-pointer opacity-75 transition hover:opacity-90">   
             <Image
               src="/logo-small.png"
               layout="fill"
